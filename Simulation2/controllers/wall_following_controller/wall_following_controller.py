@@ -8,13 +8,13 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from controller import Robot
-from adapters.webots_lidar_adapter import WebotsLidarAdapter
-from adapters.webots_imu_adapter import WebotsIMUAdapter
-from adapters.webots_encoder_adapter import WebotsEncoderAdapter
-from core.robot_state import RobotState
-from filters.complementary import ComplementaryFilter
-from motor_control.pid_controller import PID
-from config.simulation_config import SimulationConfig
+from .adapters.webots_lidar_adapter import WebotsLidarAdapter
+from .adapters.webots_imu_adapter import WebotsIMUAdapter
+from .adapters.webots_encoder_adapter import WebotsEncoderAdapter
+from .core.robot_state import RobotState
+from .filters.complementary import ComplementaryFilter
+from .motor_control.pid_controller import PID
+from .config.simulation_config import SimulationConfig
 
 class WallFollowingController:
     def __init__(self):

@@ -1,3 +1,4 @@
+import numpy as np
 class ExtendedKalmanFilter:
     def __init__(self, dim_x, dim_z):
         self.dim_x = dim_x  # Dimension of the state vector

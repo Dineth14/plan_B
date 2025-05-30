@@ -1,3 +1,4 @@
+import numpy as np
 class WebotsLidarAdapter:
     def __init__(self, lidar, config):
         self.lidar = lidar
