@@ -4,7 +4,7 @@ class WebotsIMUAdapter:
         self.accelerometer = accelerometer
         self.gyro = gyro
         self.config = config
-
+        
         self.inertial_unit.enable(config.TIMESTEP)
         self.accelerometer.enable(config.TIMESTEP)
         self.gyro.enable(config.TIMESTEP)
@@ -13,6 +13,7 @@ class WebotsIMUAdapter:
         accel = self.accelerometer.getValues()
         gyro = self.gyro.getValues()
         orientation = self.inertial_unit.getRollPitchYaw()
+        
         return {
             'accel': accel,
             'gyro': gyro,

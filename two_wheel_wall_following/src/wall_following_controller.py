@@ -32,7 +32,7 @@ class WallFollowingController:
         )
         
         self.robot_state = RobotState()
-        self.comp_filter = ComplementaryFilter(alpha=0.98)
+        self.comp_filter = ComplementaryFilter(alpha=0.98, timestep=self.timestep/1000.0)
         self.left_pid = PID(self.config.PID_KP, self.config.PID_KI, self.config.PID_KD)
         self.right_pid = PID(self.config.PID_KP, self.config.PID_KI, self.config.PID_KD)
 
@@ -47,10 +47,15 @@ class WallFollowingController:
         
         filtered_orientation = self.comp_filter.update(accel, gyro, orientation)
         
+        # Calculate new position using encoder data and current orientation
+        dt = self.timestep / 1000.0  # Convert to seconds
+        dx = encoder_data['velocity'] * np.cos(filtered_orientation) * dt
+        dy = encoder_data['velocity'] * np.sin(filtered_orientation) * dt
+        
         self.robot_state.update(
-            x=self.robot_state.x,
-            y=self.robot_state.y,
-            theta=filtered_orientation[2],
+            x=self.robot_state.x + dx,
+            y=self.robot_state.y + dy,
+            theta=filtered_orientation,
             velocity=encoder_data['velocity'],
             angular_velocity=gyro[2],
             lidar_scan=lidar_data

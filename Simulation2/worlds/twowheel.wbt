@@ -238,10 +238,27 @@ Robot {
       name "inertial_unit"
     }
     Lidar {
-      translation 2.67257e-05 0.0299963 0.000272275
-      rotation 0.5030470370970558 0.6020562948954822 0.6200579781315597 -2.19
-      name "lidar(1)"
+      translation 0 0 0.1
+      rotation 0 0 1 0
+      name "lidar"
       type "rotating"
+      horizontalResolution 360
+      fieldOfView 3.14159
+      numberOfLayers 1
+      maxRange 3
+      minRange 0.05
+      noise 0.005
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColor 0.8 0.8 0.8
+          }
+          geometry Cylinder {
+            height 0.02
+            radius 0.02
+          }
+        }
+      ]
     }
     Pose {
       children [
@@ -258,17 +275,6 @@ Robot {
     Pose {
       translation 0 0 0.08
       children [
-        Lidar {
-          translation 0 0 0.08
-          rotation 0 1 0 0
-          horizontalResolution 1
-          fieldOfView 6.28319
-          numberOfLayers 1
-          maxRange 5
-          type "rotating"
-          noise 0.01
-          resolution 512
-        }
         Shape {
           appearance PBRAppearance {
             baseColor 0.8 0.8 0.8

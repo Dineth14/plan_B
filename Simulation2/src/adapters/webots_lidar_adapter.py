@@ -1,28 +1,18 @@
 import numpy as np
 class WebotsLidarAdapter:
-    def __init__(self, lidar, config):
-        self.lidar = lidar
+    def __init__(self, lidar_device, config):
+        self.lidar_device = lidar_device
         self.config = config
-        self.lidar.enable(self.config.LIDAR_TIMESTEP)
+        self.lidar_device.enable(config.LIDAR_ENABLE_TIME)
 
     def get_scan(self):
-        """Retrieve the latest LiDAR scan data."""
-        return self.lidar.getRangeImage()
+        return self.lidar_device.getRangeImage()
 
-    def get_point_cloud(self):
-        """Retrieve the point cloud data from the LiDAR."""
-        distances = self.get_scan()
-        angles = np.linspace(-self.config.LIDAR_FOV / 2, self.config.LIDAR_FOV / 2, len(distances))
-        points = []
+    def get_distances(self):
+        return self.get_scan()
 
-        for distance, angle in zip(distances, angles):
-            if distance < self.config.LIDAR_MAX_DISTANCE:
-                x = distance * np.cos(angle)
-                y = distance * np.sin(angle)
-                points.append((x, y))
+    def get_angle(self):
+        return self.lidar_device.getFov() / 2
 
-        return points
-
-    def get_angles(self):
-        """Get the angles corresponding to the LiDAR measurements."""
-        return np.linspace(-self.config.LIDAR_FOV / 2, self.config.LIDAR_FOV / 2, self.lidar.getNumberOfPoints())
+    def get_resolution(self):
+        return self.lidar_device.getHorizontalResolution()

@@ -1,28 +1,26 @@
 class SimulationConfig:
     def __init__(self):
         # Sensor settings
-        self.LIDAR_OFFSET_MM = 0.0
-        self.WHEEL_RADIUS = 0.1  # Wheel radius in meters
-        self.WHEEL_DISTANCE = 0.5  # Distance between wheels in meters
-        
+        self.LIDAR_ENABLE_TIME = 32  # ms, for compatibility with adapters
+        self.LIDAR_TIMESTEP = 32     # ms, for compatibility with adapters
+        self.LIDAR_FOV = 6.28319     # 2*pi, full circle
+        self.LIDAR_MAX_DISTANCE = 5.0
+        self.WHEEL_RADIUS = 0.03     # meters, match robot
+        self.WHEEL_DISTANCE = 0.1    # meters, match robot
+
         # PID controller gains
         self.PID_KP = 1.0
-        self.PID_KI = 0.0
-        self.PID_KD = 0.0
-        
+        self.PID_KI = 0.1
+        self.PID_KD = 0.05
+
         # Simulation parameters
         self.DISPLAY_WIDTH = 800
         self.DISPLAY_HEIGHT = 600
-        self.MAX_MOTOR_SPEED = 6.28  # Maximum speed in m/s
-        
+        self.MAX_MOTOR_SPEED = 6.28  # rad/s
+
         # Wall following parameters
-        self.WALL_FOLLOWING_DISTANCE = 0.2  # Desired distance from the wall in meters
-        self.AVOIDANCE_DISTANCE = 0.5  # Distance to trigger obstacle avoidance in meters
-        self.WAYPOINT_THRESHOLD = 0.1  # Threshold to consider waypoint reached
-        
-        # SLAM parameters
-        self.MAP_SIZE_PIXELS = 500
-        self.MAP_SIZE_METERS = 10.0
-        self.MAP_QUALITY = 0.5
-        self.HOLE_WIDTH_MM = 50
-        self.NUM_PARTICLES = 100  # Number of particles for SLAM
+        self.WALL_DISTANCE_THRESHOLD = 0.5  # meters
+        self.DEFAULT_SPEED = 1.0            # m/s
+
+        # Time step for sensors and control loop
+        self.TIMESTEP = 32                  # ms
